@@ -1,30 +1,44 @@
-import Enemy from "./Enemy.js";
 import Bullet from "./Bullet.js";
-export default class bulletController {
-    bullets = [];
-    timerTillNextBullet = 0;
-    constructor(canvas) {
-        this.canvas = canvas;
+
+export default class BulletController {
+  bullets = [];
+  timerTillNextBullet = 0;
+
+  constructor(canvas) {
+    this.canvas = canvas;
+  }
+
+  shoot(x, y, speed, damage, delay) {
+    if (this.timerTillNextBullet <= 0) {
+      this.bullets.push(new Bullet(x, y, speed, damage));
+      this.timerTillNextBullet = delay;
     }
-    shoot(x, y, speed, damage, delay) {
-        if (this.timerTillNextBullet <= 0) {
-            this.bullets.push(new Bullet(x, y, speed, damage))
-            this.timerTillNextBullet = delay;
-        }
-        this.timerTillNextBullet--;
+    this.timerTillNextBullet--;
+  }
+
+  isOutside(bullet) {
+    if (bullet.y < 0) {
+      return true;
     }
-    draw(ctx) {
-        this.bullets.forEach((bullet) => bullet.draw(ctx))
+    return false;
+  }
+
+  removeBullet(bullet) {
+    const index = this.bullets.indexOf(bullet);
+    if (index !== -1) {
+      this.bullets.splice(index, 1);
     }
-    collideWidt(Enemy) {
-        return this.bullets.some(bullet => {
-            if (bullet.collideWidt(Enemy)) {
-                this.bullets.slice(this.bullets.indexOf(bullet),1);
-                return true;
-            }
-            return false;
-        });
-        
-    }
-    
+  }
+
+  draw(ctx) {
+    const newBulletList = [];
+    this.bullets.forEach((bullet, index) => {
+      if (!this.isOutside(bullet)) {
+        bullet.draw(ctx);
+        newBulletList.push(bullet);
+      }
+    });
+
+    this.bullets = newBulletList;
+  }
 }
