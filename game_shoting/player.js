@@ -1,21 +1,21 @@
 export default class Player {
-  constructor(x, y, bulletController) {
+  constructor(x, y, bulletController,health) {
     this.x = x;
+    this.health = 3;
     this.y = y;
     this.bulletController = bulletController;
     this.width = 50;
     this.height = 50;
     this.speed = 5;
+    this.image = new Image();
+    this.image.src = "ship.png"
     document.addEventListener("keydown", this.keydown);
-    document.addEventListener("keyup", this.keyup);
+    document.addEventListener("keyup", this.keyup)
   }
 
   draw(ctx) {
     this.move();
-    ctx.strokeStyle = "red";
-    ctx.fillStyle = "aqua";
-    ctx.strokeRect(this.x, this.y, this.width, this.height);
-    ctx.fillRect(this.x, this.y, this.width, this.height);
+    ctx.drawImage(this.image, this.x, this.y, this.width, this.height); 
     this.shoot();
   }
 

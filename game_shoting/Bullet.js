@@ -6,10 +6,10 @@ export default class Bullet {
         this.y = y;
         this.speed = speed;
         this.damage = damage;
-        this.width = 5;
-        this.height = 15;
-        this.color = "red"
-        this.id = index++
+        this.width = 3;
+        this.height = 10;
+        this.color = "red";
+        this.id = index++;
     }
 
     draw(ctx) {
