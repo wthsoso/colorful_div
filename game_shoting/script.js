@@ -70,7 +70,7 @@ function gameLoop() {
   enemies.forEach((enemy) => {
     let index = 0;
     enemy.move(canvas);
-    
+
     let isBrake = false;
     while (index < bullets.length) {
       const bullet = bullets[index];
@@ -101,7 +101,7 @@ function gameLoop() {
       score_counter += 10;
       console.log(score_counter)
     }
-    if (score_counter >= 100 && enemies.length === 0) {
+    if (score_counter == 100 && enemies.length === 0) {
       enemies.push(
         new Enemy(50, 20, 5, "enemy1.png", 2, canvas),
         new Enemy(150, 20, 5, "enemy1.png", 2, canvas),
@@ -112,16 +112,34 @@ function gameLoop() {
         new Enemy(150, 100, 5, "enemy1.png", 2, canvas),
         new Enemy(250, 100, 2, "enemy4.png", 2, canvas),
         new Enemy(350, 100, 2, "enemy4.png", 2, canvas),
-        new Enemy(450, 100, 20, "enemy2.png", 2, canvas)
+        new Enemy(450, 100, 15, "enemy2.png", 2, canvas)
       );
       console.log("all enemies are dead kill them again")
       enemies.forEach((enemy) => {
-        enemy.speed += speedIncrement; 
+        enemy.speed += speedIncrement;
       });
-      score_counter = 0;
     }
-  });
 
+  });
+  if (score_counter == 200 && enemies.length === 0) {
+    enemies.push(
+      new Enemy(50, 20, 5, "enemy1.png", 2, canvas),
+      new Enemy(150, 20, 5, "enemy1.png", 2, canvas),
+      new Enemy(250, 20, 10, "enemy3.png", 2, canvas),
+      new Enemy(350, 20, 2, "enemy4.png", 2, canvas),
+      new Enemy(450, 20, 10, "enemy3.png", 2, canvas),
+      new Enemy(50, 100, 5, "enemy1.png", 2, canvas),
+      new Enemy(150, 100, 5, "enemy1.png", 2, canvas),
+      new Enemy(250, 100, 2, "enemy4.png", 2, canvas),
+      new Enemy(350, 100, 2, "enemy4.png", 2, canvas),
+      new Enemy(450, 100, 15, "enemy2.png", 2, canvas)
+    );
+    console.log("all enemies are dead kill them again")
+    enemies.forEach((enemy) => {
+      enemy.speed += speedIncrement;
+    });
+
+  }
   if (enemies.length === 0) {
     button.style.display = "block";
   } else {
