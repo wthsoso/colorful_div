@@ -5,6 +5,7 @@ import Enemy from "./Enemy.js";
 const button = document.getElementById("button");
 button.addEventListener("click", restart);
 var score_counter = 0;
+const speedIncrement = 1;
 const canvas = document.getElementById("game");
 const ctx = canvas.getContext("2d");
 
@@ -69,7 +70,7 @@ function gameLoop() {
   enemies.forEach((enemy) => {
     let index = 0;
     enemy.move(canvas);
-
+    
     let isBrake = false;
     while (index < bullets.length) {
       const bullet = bullets[index];
@@ -114,6 +115,9 @@ function gameLoop() {
         new Enemy(450, 100, 20, "enemy2.png", 2, canvas)
       );
       console.log("all enemies are dead kill them again")
+      enemies.forEach((enemy) => {
+        enemy.speed += speedIncrement; 
+      });
       score_counter = 0;
     }
   });
