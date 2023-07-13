@@ -5,7 +5,7 @@ import Enemy from "./Enemy.js";
 const button = document.getElementById("button");
 button.addEventListener("click", restart);
 var score_counter = 0;
-const speedIncrement = 1;
+var speedIncrement = 1;
 const canvas = document.getElementById("game");
 const ctx = canvas.getContext("2d");
 
@@ -114,10 +114,11 @@ function gameLoop() {
         new Enemy(350, 100, 2, "enemy4.png", 2, canvas),
         new Enemy(450, 100, 15, "enemy2.png", 2, canvas)
       );
-      console.log("all enemies are dead kill them again")
+      console.log("difficulti incrised")
       enemies.forEach((enemy) => {
         enemy.speed += speedIncrement;
       });
+      speedIncrement += 1;
     }
 
   });
@@ -134,7 +135,7 @@ function gameLoop() {
       new Enemy(350, 100, 2, "enemy4.png", 2, canvas),
       new Enemy(450, 100, 15, "enemy2.png", 2, canvas)
     );
-    console.log("all enemies are dead kill them again")
+    console.log("difficulti incrised again!")
     enemies.forEach((enemy) => {
       enemy.speed += speedIncrement;
     });
@@ -153,4 +154,3 @@ function setCommonStyle() {
 }
 
 setInterval(gameLoop, 1000 / 60);
-
