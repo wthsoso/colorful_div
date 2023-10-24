@@ -4,6 +4,15 @@ const scoreDisplay = document.getElementById("score");
 const startButton = document.getElementById("startButton");
 const resetButton = document.getElementById("restartButton");
 let score = 0;
+
+
+const carImage = new Image();
+carImage.src = "main_Car2_changed.png";
+
+
+const obstacleImage = new Image();
+obstacleImage.src = "enemy_car.png";
+
 let carX = 185; 
 let obstacleX = 0;
 let obstacleY = -30;
@@ -22,9 +31,9 @@ function startGame() {
 
 function moveCar(e) {
     if (e.key === "ArrowLeft" && carX > 0) {
-        carX -= 10;
+        carX -= 15;
     } else if (e.key === "ArrowRight" && carX < 370) {
-        carX += 10;
+        carX += 15;
     }
 }
 
@@ -42,22 +51,21 @@ function clearCanvas() {
 }
 
 function drawCar() {
-    ctx.fillStyle = "blue";
-    ctx.fillRect(carX, canvas.height - 60, 30, 60);
+    ctx.drawImage(carImage, carX, canvas.height - 60, 30, 60);
 }
 
 function drawObstacle() {
-    ctx.fillStyle = "red";
-    ctx.fillRect(obstacleX, obstacleY, 30, 60);
+    ctx.drawImage(obstacleImage, obstacleX, obstacleY, 30, 60);
 }
 
+
 function moveObstacle() {
-    obstacleY += 5;
+    obstacleY += 10;
 
     if (obstacleY > canvas.height) {
         obstacleX = Math.floor(Math.random() * 370);
         obstacleY = -30;
-        score++;
+        score += 5;
     }
 }
 
@@ -65,7 +73,7 @@ function checkCollision() {
     if (
         carX < obstacleX + 30 &&
         carX + 30 > obstacleX &&
-        canvas.height - 60 < obstacleY + 30
+        canvas.height - 60 < obstacleY + 60
     ) {
         endGame();
     }

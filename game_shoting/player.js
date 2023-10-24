@@ -8,7 +8,7 @@ export default class Player {
     this.height = 50;
     this.speed = 5;
     this.image = new Image();
-    this.image.src = "ship.png"
+    this.image.src = "ship.png";
     document.addEventListener("keydown", this.keydown);
     document.addEventListener("keyup", this.keyup)
   }
